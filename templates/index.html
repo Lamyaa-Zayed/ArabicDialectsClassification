@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>>NLP for dialect Detection</title>
+  </head>
+  <body>
+    <div class="tab-content" id="myTabContent">
+		  <div class="tab-pane fade {% if (variable is not none) or (variables is none and variable is none) %}{{'show active'}} {%endif %}" id="home" role="tabpanel" aria-labelledby="home-tab">
+				<div id="tweet" class="col s12">
+						<form action="{{ url_for('predict')}}" method="post">
+						  <div class="form-group">
+						    <label for="exampleFormControlTextarea1" style="font-size: 20px; margin-top: 10px;">Entre your tweet :</label>
+						    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text"></textarea>
+						    <button type="submit" class="btn btn-primary mb-2" style="margin-top: 20px">Submit</button>
+						  </div>
+						</form>
+
+				  <table class="highlight" style="width: 100%">
+			        <thead>
+			          <tr>			             
+			              <th style="text-align: center; width: 20%">Dialect</th>
+			          </tr>
+			        </thead>
+
+			        <tbody>
+			        	{% if variable is not none %} 
+				        	{% for value in variable %}
+								
+									<td>
+										{% for dialect, per in value['dialect'].items() %}
+										<span style="float: left;margin-left:60px; color: green">{{ dialect }}</span><span style="float: right;margin-right:60px; color: red">{{ per }}%</span><br>
+										{% endfor %}
+									</td>
+								</tr>
+							{% endfor %}
+						{%endif %}
+			        </tbody>
+			      </table>
+				</div>
+		  </div>
+    </div>
+  </body>
+</html>
